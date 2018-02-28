@@ -13,11 +13,11 @@ public class ExceptionalFunctions {
         throw new UnsupportedOperationException("ExceptionalFunctions initialization is not supported");
     }
 
-    public static <T,R,E extends Exception> Function<T,R> unchecked(ExceptionalFunction<T,R,E> function) {
-        return unchecked(function, RuntimeException::new);
+    public static <T,R,E extends Exception> Function<T,R> uncheckedFunction(ExceptionalFunction<T,R,E> function) {
+        return uncheckedFunction(function, RuntimeException::new);
     }
 
-    public static <T,R,E extends Exception> Function<T,R> unchecked(ExceptionalFunction<T,R,E> function, Supplier<? extends RuntimeException> exceptionSupplier) {
+    public static <T,R,E extends Exception> Function<T,R> uncheckedFunction(ExceptionalFunction<T,R,E> function, Supplier<? extends RuntimeException> exceptionSupplier) {
         return input -> {
             try {
                 return function.apply(input);
@@ -27,11 +27,11 @@ public class ExceptionalFunctions {
         };
     }
 
-    public static <T,E extends Exception> Supplier<T> unchecked(ExceptionalSupplier<T,E> supplier) {
-        return unchecked(supplier, RuntimeException::new);
+    public static <T,E extends Exception> Supplier<T> uncheckedSupplier(ExceptionalSupplier<T,E> supplier) {
+        return uncheckedSupplier(supplier, RuntimeException::new);
     }
 
-    public static <T,E extends Exception> Supplier<T> unchecked(ExceptionalSupplier<T,E> supplier, Supplier<? extends RuntimeException> exceptionSupplier) {
+    public static <T,E extends Exception> Supplier<T> uncheckedSupplier(ExceptionalSupplier<T,E> supplier, Supplier<? extends RuntimeException> exceptionSupplier) {
         return () -> {
             try {
                 return supplier.get();
@@ -41,11 +41,11 @@ public class ExceptionalFunctions {
         };
     }
 
-    public static <T,E extends Exception> Consumer<T> unchecked(ExceptionalConsumer<T,E> consumer) {
-        return unchecked(consumer, RuntimeException::new);
+    public static <T,E extends Exception> Consumer<T> uncheckedConsumer(ExceptionalConsumer<T,E> consumer) {
+        return uncheckedConsumer(consumer, RuntimeException::new);
     }
 
-    public static <T,E extends Exception> Consumer<T> unchecked(ExceptionalConsumer<T,E> consumer, Supplier<? extends RuntimeException> exceptionSupplier) {
+    public static <T,E extends Exception> Consumer<T> uncheckedConsumer(ExceptionalConsumer<T,E> consumer, Supplier<? extends RuntimeException> exceptionSupplier) {
         return v -> {
             try {
                 consumer.accept(v);
