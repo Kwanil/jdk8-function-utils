@@ -8,18 +8,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import static function.ExceptionalFunctions.uncheckedFunction;
+import static function.Functions.unchecked;
 import static java.util.stream.Collectors.toList;
 
-
-public class ExceptionalFunctionsTest {
-
+public class FunctionsTest {
     @Test
-    public void testUncheckedFunction() throws Exception{
+    public void testUnchecked() throws Exception {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         List<Future<Object>> futureList = executorService.invokeAll(Arrays.asList(() -> 1, ()->"a"));
-        List<Object> objects = futureList.stream().map(uncheckedFunction(Future::get)).collect(toList());
+        List<Object> objects = futureList.stream().map(unchecked(Future::get)).collect(toList());
         System.out.println(objects);
     }
-
 }
